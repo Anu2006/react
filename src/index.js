@@ -53,7 +53,7 @@ class Game extends React.Component {
         }
       ],
       stepNumber: 0,
-      xIsNext: true
+      rIsNext: false
     };
   }
 
@@ -64,7 +64,7 @@ class Game extends React.Component {
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
-    squares[i] = this.state.xIsNext ? "X" : "O";
+    squares[i] = this.state.rIsNext ? "R" : "A";
     this.setState({
       history: history.concat([
         {
@@ -72,14 +72,14 @@ class Game extends React.Component {
         }
       ]),
       stepNumber: history.length,
-      xIsNext: !this.state.xIsNext
+      rIsNext: !this.state.rIsNext
     });
   }
 
   jumpTo(step) {
     this.setState({
       stepNumber: step,
-      xIsNext: (step % 2) === 0
+      rIsNext: (step % 2) === 0
     });
   }
 
@@ -101,9 +101,9 @@ class Game extends React.Component {
 
     let status;
     if (winner) {
-      status = "Winner: " + winner;
+      status = "Champion: " + winner;
     } else {
-      status = "Next player: " + (this.state.xIsNext ? "X" : "O");
+      status = "Next player: " + (this.state.rIsNext ? "Ranil" : "Anu2006");
     }
 
     return (
@@ -138,6 +138,10 @@ function calculateWinner(squares) {
     [0, 4, 8],
     [2, 4, 6]
   ];
+  const custom = ["A", "R", "A", "A", "R", "R", "R", "A", "A"]
+  if (squares.toString() === custom.toString()) {
+    return 'Ranil'
+  }
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
