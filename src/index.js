@@ -79,7 +79,7 @@ class Game extends React.Component {
   jumpTo(step) {
     this.setState({
       stepNumber: step,
-      rIsNext: (step % 2) === 0
+      rIsNext: (step % 2) !== 0
     });
   }
 
@@ -123,8 +123,6 @@ class Game extends React.Component {
   }
 }
 
-// ========================================
-
 ReactDOM.render(<Game />, document.getElementById("root"));
 
 function calculateWinner(squares) {
@@ -138,8 +136,8 @@ function calculateWinner(squares) {
     [0, 4, 8],
     [2, 4, 6]
   ];
-  const custom = ["A", "R", "A", "A", "R", "R", "R", "A", "A"]
-  if (squares.toString() === custom.toString()) {
+  const custom = ["A", "R", "A", "A", "R", "R", "R", "A", "A"] // board position required
+  if (squares.toString() === custom.toString()) { // custom winning method
     return 'Ranil'
   }
   for (let i = 0; i < lines.length; i++) {
